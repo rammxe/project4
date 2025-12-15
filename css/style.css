@@ -1,0 +1,818 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text y="32" font-size="32">🎬</text></svg>'),
+    auto;
+}
+
+body {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  min-height: 100vh;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* 배경 애니메이션 효과 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.25) 0%, transparent 50%), /* 0.15에서 0.25로 */
+    radial-gradient(circle at 80% 80%, rgba(234, 102, 165, 0.25) 0%, transparent 50%), /* 0.15에서 0.25로 */
+    radial-gradient(circle at 40% 20%, rgba(102, 234, 200, 0.2) 0%, transparent 50%); /* 0.1에서 0.2로 */
+  animation: gradientMove 15s ease infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes gradientMove {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  33% {
+    transform: translate(50px, -50px) scale(1.1);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(-50px, 50px) scale(0.9);
+    opacity: 0.9;
+  }
+}
+
+/* 반짝이는 별 효과 */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(3px 3px at 20% 30%, white, transparent), /* 2px에서 3px로 */
+    radial-gradient(3px 3px at 60% 70%, white, transparent),
+    radial-gradient(2px 2px at 50% 50%, white, transparent), /* 1px에서 2px로 */
+    radial-gradient(2px 2px at 80% 10%, white, transparent),
+    radial-gradient(3px 3px at 90% 60%, white, transparent),
+    radial-gradient(2px 2px at 33% 80%, white, transparent),
+    radial-gradient(2px 2px at 15% 90%, white, transparent);
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  animation: stars 20s ease-in-out infinite;
+  opacity: 0.5; /* 0.3에서 0.5로 증가 */
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes stars {
+  0%,
+  100% {
+    background-position: 0% 0%;
+    opacity: 0.3;
+  }
+  50% {
+    background-position: 100% 100%;
+    opacity: 0.5;
+  }
+}
+
+/* 추가 글로우 효과 */
+.movie-glow {
+  position: fixed;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(102, 126, 234, 0.2) 0%,
+    transparent 70%
+  );
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: -1;
+  animation: floatGlow 20s ease-in-out infinite;
+}
+
+.movie-glow:nth-child(1) {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.movie-glow:nth-child(2) {
+  top: 60%;
+  right: 10%;
+  background: radial-gradient(
+    circle,
+    rgba(234, 102, 165, 0.2) 0%,
+    transparent 70%
+  );
+  animation-delay: 5s;
+}
+
+.movie-glow:nth-child(3) {
+  bottom: 10%;
+  left: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(102, 234, 200, 0.15) 0%,
+    transparent 70%
+  );
+  animation-delay: 10s;
+}
+
+@keyframes floatGlow {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.2);
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.8);
+  }
+}
+
+/* 클릭 가능한 요소들은 포인터 모양 */
+button,
+a,
+.card {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text y="32" font-size="32">🎥</text></svg>'),
+    pointer !important;
+}
+
+/* 헤더  */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo a {
+  display: block;
+}
+
+.logo img {
+  height: 90px;
+  width: auto;
+  object-fit: cover;
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+nav i {
+  font-size: 25px;
+  background: linear-gradient(135deg, #b8b8b8 0%, #d4d4d4 50%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+nav i:hover {
+  background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 50%, #b8b8b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: scale(1.1);
+}
+
+/* 메뉴 스타일 - 유리 효과 */
+.menu {
+  text-align: center;
+  margin: 30px auto;
+  padding: 20px 0;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu button {
+  margin: 0 10px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.menu button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.menu button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.menu button:active {
+  background: rgba(102, 126, 234, 0.4);
+  transform: translateY(0px);
+}
+
+/* 검색 영역 - 유리 효과 */
+.search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 25px 0;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#searchInput {
+  width: 400px;
+  padding: 15px 20px;
+  font-size: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  color: white;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#searchInput:focus {
+  border-color: rgba(102, 126, 234, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+  transform: scale(1.02);
+}
+
+#searchBtn {
+  padding: 15px 35px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: rgba(102, 126, 234, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#searchBtn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+#searchBtn:hover::after {
+  width: 200px;
+  height: 200px;
+}
+
+#searchBtn:hover {
+  background: rgba(102, 126, 234, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+#searchBtn:active {
+  background: rgba(102, 126, 234, 0.7);
+  transform: translateY(0px);
+}
+
+/* 영화 보드 */
+#movieBoard {
+  width: 90%;
+  max-width: 1400px;
+  margin: 40px auto;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* 검색 결과 없을 때 */
+.no-result {
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 100px 0;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* 카드 기본 스타일 - 유리 효과 + 등장 애니메이션 */
+.card {
+  position: relative;
+  width: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: cardAppear 0.6s ease-out backwards;
+}
+
+/* 카드 등장 애니메이션 */
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 각 카드마다 딜레이 적용 */
+.card:nth-child(1) {
+  animation-delay: 0s;
+}
+.card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.card:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.card:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.card:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.card:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.card:nth-child(8) {
+  animation-delay: 0.7s;
+}
+.card:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.card:nth-child(10) {
+  animation-delay: 0.9s;
+}
+.card:nth-child(11) {
+  animation-delay: 1s;
+}
+.card:nth-child(12) {
+  animation-delay: 1.1s;
+}
+.card:nth-child(13) {
+  animation-delay: 1.2s;
+}
+.card:nth-child(14) {
+  animation-delay: 1.3s;
+}
+.card:nth-child(15) {
+  animation-delay: 1.4s;
+}
+.card:nth-child(16) {
+  animation-delay: 1.5s;
+}
+.card:nth-child(17) {
+  animation-delay: 1.6s;
+}
+.card:nth-child(18) {
+  animation-delay: 1.7s;
+}
+.card:nth-child(19) {
+  animation-delay: 1.8s;
+}
+.card:nth-child(20) {
+  animation-delay: 1.9s;
+}
+
+.card:hover {
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 0 20px 50px rgba(102, 126, 234, 0.5);
+  border-color: rgba(102, 126, 234, 0.5);
+  z-index: 10;
+}
+
+.card:active {
+  transform: translateY(-10px) scale(1.02);
+}
+
+/* 포스터 이미지 */
+.movie-poster {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  display: block;
+  transition: all 0.4s ease;
+}
+
+/* 호버하면 이미지 흐릿해지고 살짝 확대 */
+.card:hover .movie-poster {
+  filter: blur(8px) brightness(0.3);
+  transform: scale(1.1);
+}
+
+/* 영화 제목 */
+.movie-title {
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease;
+}
+
+.card:hover .movie-title {
+  background: rgba(102, 126, 234, 0.3);
+  color: #ffd700;
+}
+
+/* 호버시 나타날 오버레이 - 유리 효과 */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 450px;
+  color: white;
+  padding: 40px 25px;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.9);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background: rgba(10, 10, 30, 0.85);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 카드 호버시 오버레이 나타남 */
+.card:hover .card-overlay {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+/* 오버레이 제목 */
+.overlay-title {
+  color: #ffd700;
+  font-size: 20px;
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  animation: fadeInDown 0.5s ease-out 0.1s backwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 줄거리 텍스트 */
+.movie-overview {
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: center;
+  padding: 0 10px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.95);
+  animation: fadeIn 0.6s ease-out 0.2s backwards;
+}
+
+/* 평점 - 펄스 효과 */
+.movie-rating {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffd700;
+  text-align: center;
+  margin: 10px 0;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  animation: pulse 2s ease-in-out infinite, fadeIn 0.6s ease-out 0.3s backwards;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* 개봉일 */
+.movie-release {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.6s ease-out 0.4s backwards;
+}
+
+.movie-release:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* 더보기 버튼 스타일 */
+#movie {
+  display: block;
+  margin: 50px auto;
+  padding: 15px 50px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: rgba(102, 126, 234, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#movie::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+#movie:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+#movie:hover {
+  background: rgba(102, 126, 234, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+#movie:active {
+  background: rgba(102, 126, 234, 0.7);
+  transform: translateY(-1px);
+}
+
+/* 영화 예고편 모달 - 유리 효과 */
+.trailer-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.trailer-modal.active {
+  display: flex;
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.close-modal {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.close-modal:hover {
+  background: rgba(255, 77, 77, 0.8);
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 5px 20px rgba(255, 77, 77, 0.5);
+}
+
+.trailer-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 비율 */
+  background: #000;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.trailer-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .card {
+    width: calc(33.333% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 12px 20px;
+  }
+
+  .logo img {
+    height: 50px;
+  }
+
+  nav i {
+    font-size: 20px;
+  }
+
+  .card {
+    width: calc(50% - 15px);
+  }
+
+  .card:hover {
+    transform: translateY(-10px) scale(1.03);
+  }
+
+  #searchInput {
+    width: 300px;
+  }
+
+  .menu button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+  }
+
+  #searchInput {
+    width: 250px;
+  }
+
+  .logo img {
+    height: 45px;
+  }
+
+  nav i {
+    font-size: 18px;
+  }
+}
