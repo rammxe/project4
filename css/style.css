@@ -2,14 +2,19 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text y="32" font-size="32">🎬</text></svg>'),
+  cursor:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text y="32" font-size="32">🎬</text></svg>'),
     auto;
+}
+
+html {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
 }
 
 body {
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
   min-height: 100vh;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   color: #fff;
   overflow-x: hidden;
   position: relative;
@@ -18,15 +23,29 @@ body {
 /* 배경 애니메이션 효과 */
 body::before {
   content: '';
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.25) 0%, transparent 50%), /* 0.15에서 0.25로 */
-    radial-gradient(circle at 80% 80%, rgba(234, 102, 165, 0.25) 0%, transparent 50%), /* 0.15에서 0.25로 */
-    radial-gradient(circle at 40% 20%, rgba(102, 234, 200, 0.2) 0%, transparent 50%); /* 0.1에서 0.2로 */
+  background:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(102, 126, 234, 0.25) 0%,
+      transparent 50%
+    ),
+    /* 0.15에서 0.25로 */
+    radial-gradient(
+        circle at 80% 80%,
+        rgba(234, 102, 165, 0.25) 0%,
+        transparent 50%
+      ),
+    /* 0.15에서 0.25로 */
+    radial-gradient(
+        circle at 40% 20%,
+        rgba(102, 234, 200, 0.2) 0%,
+        transparent 50%
+      ); /* 0.1에서 0.2로 */
   animation: gradientMove 15s ease infinite;
   z-index: -1;
   pointer-events: none;
@@ -56,10 +75,10 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-    radial-gradient(3px 3px at 20% 30%, white, transparent), /* 2px에서 3px로 */
+  background-image:
+    radial-gradient(3px 3px at 20% 30%, white, transparent),
     radial-gradient(3px 3px at 60% 70%, white, transparent),
-    radial-gradient(2px 2px at 50% 50%, white, transparent), /* 1px에서 2px로 */
+    radial-gradient(2px 2px at 50% 50%, white, transparent),
     radial-gradient(2px 2px at 80% 10%, white, transparent),
     radial-gradient(3px 3px at 90% 60%, white, transparent),
     radial-gradient(2px 2px at 33% 80%, white, transparent),
@@ -146,7 +165,8 @@ body::after {
 button,
 a,
 .card {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text y="32" font-size="32">🎥</text></svg>'),
+  cursor:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><text y="32" font-size="32">🎥</text></svg>'),
     pointer !important;
 }
 
@@ -250,7 +270,7 @@ nav i:hover {
 }
 
 .menu button::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -259,7 +279,9 @@ nav i:hover {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .menu button:hover::before {
@@ -337,7 +359,7 @@ nav i:hover {
 }
 
 #searchBtn::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -346,7 +368,9 @@ nav i:hover {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.5s, height 0.5s;
+  transition:
+    width 0.5s,
+    height 0.5s;
 }
 
 #searchBtn:hover::after {
@@ -593,7 +617,9 @@ nav i:hover {
   text-align: center;
   margin: 10px 0;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-  animation: pulse 2s ease-in-out infinite, fadeIn 0.6s ease-out 0.3s backwards;
+  animation:
+    pulse 2s ease-in-out infinite,
+    fadeIn 0.6s ease-out 0.3s backwards;
 }
 
 @keyframes pulse {
@@ -642,7 +668,7 @@ nav i:hover {
 }
 
 #movie::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -651,7 +677,9 @@ nav i:hover {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
   transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 #movie:hover::before {
@@ -793,9 +821,28 @@ nav i:hover {
     font-size: 14px;
   }
 
+  .trailer-modal {
+    align-items: flex-end;
+    padding-bottom: 20px;
+  }
+
   .modal-content {
-    width: 95%;
-    padding: 15px;
+    width: 88%;
+    padding: 12px;
+    border-radius: 15px;
+  }
+
+  /* iframe 높이 줄이기 */
+  .trailer-container {
+    padding-bottom: 45%;
+  }
+
+  .close-modal {
+    top: -12px;
+    right: -12px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
   }
 }
 
@@ -814,5 +861,13 @@ nav i:hover {
 
   nav i {
     font-size: 18px;
+  }
+
+  .modal-content {
+    width: 85%;
+  }
+
+  .trailer-container {
+    padding-bottom: 40%; /* 더 작은 화면에서 더 줄이기 */
   }
 }
